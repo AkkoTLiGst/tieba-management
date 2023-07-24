@@ -4,6 +4,7 @@
         background-color="#324157"
         text-color='white'
         router
+        :collapse="sidebar.showSideBar"
         :default-active="onRoutes"
         unique-opened
     >
@@ -40,6 +41,9 @@
 import {Message, Odometer, Operation, Warning, View} from "@element-plus/icons-vue";
 import {useRoute} from "vue-router";
 import {computed} from "vue";
+import {sideBar} from '../store/sideBar.ts'
+
+const sidebar = sideBar();
 
 // 设置菜单
 const items = [
@@ -92,11 +96,18 @@ const onRoutes = computed(() => {
 
 <style scoped lang="less">
 .sideBar {
-  color: white;
-  width: 250px;
+  display: block;
+  position: absolute;
+  top: 70px; left: 0; bottom: 0;
   height: 100%;
-  :deep(.el-menu){
+  .el-menu{
     height: 100%;
+  }
+  .el-menu:not(.el-menu--collapse) {
+    width: 250px;
+  }
+  .el-menu::-webkit-scrollbar {
+    width: 0;
   }
 }
 </style>

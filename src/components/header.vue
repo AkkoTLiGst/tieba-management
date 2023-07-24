@@ -1,9 +1,9 @@
 <template>
   <div class="header">
     <div class="left">
-      <i-ep-Expand @click="changeSideView" v-show="sideView"></i-ep-Expand>
+      <i-ep-Expand @click="changeSideView" v-show="sidebar.showSideBar"></i-ep-Expand>
 
-      <i-ep-Fold @click="changeSideView" v-show="!sideView"></i-ep-Fold>
+      <i-ep-Fold @click="changeSideView" v-show="!sidebar.showSideBar"></i-ep-Fold>
 
       <span>贴吧后台管理</span>
     </div>
@@ -36,13 +36,14 @@
 <script setup lang="ts">
 import {userStore} from "../store";
 import {ref} from "vue";
+import {sideBar} from "../store/sideBar.ts";
 
 const store = userStore();
+const sidebar = sideBar();
 
 //切换显示侧边栏的方式
-const sideView = ref(false);
 const changeSideView = () => {
-  sideView.value = !sideView.value;
+  sidebar.sideBarEvent();
 }
 
 
